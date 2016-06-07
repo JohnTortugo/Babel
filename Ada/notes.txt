@@ -73,10 +73,57 @@ you set a Float to a constant, the constant must be written with a period in
 it, or the compiler will complain.
 
 
+Normally Ada will evaluate these expressions in whatever order is most
+efficient for the machine. If it's important to evaluate them in a certain
+order and to stop evaluating them when the answer is known, there are versions
+of `and' and `or' that are called `short-circuit operations'. These operations
+will execute strictly left-to-right and will not execute anything if they don't
+have to. C's && and || operations work this way. The short-circuit version of
+`and' is `and then'; the short-circuit version of `or' is `or else'.
+
+One very important difference between Ada and some other languages is that Ada
+considers types different even if they happen to be implemented the same way at
+a particular time.
+
+Here's an example of a new type named Column which can only have integer values
+in the range 1 through 72, and another type called Row that has values 1
+through 24:
+
+ type Column is range 1 .. 72;
+ type Row    is range 1 .. 24;
+
+Ada array indices are not required to start at zero or one. Array indices can
+begin (and end) with any discrete value - whatever makes the most sense for the
+data. This means that you can start arrays at -5 (if that makes sense), and you
+can use enumerated values as indices as well. Ada programs usually use a
+starting index of 1 if there's no particularly natural starting point;
 
 
+Strings
+------------------------------
+
+if you pass in a string slice as an input parameter to a subprogram, the receiving subprogram will receive the slice's index values.
+
+Ada 95 provides a number of different ``string'' types, each best for a certain purpose.
+
+String
+This is the basic Ada String type, and is also called a ``fixed length string''. This type (String) is simply an array of Characters.
+
+Bounded_String
+Values of this type can vary in length up to a maximum length (which you supply).
+
+Unbounded_String
+Values of this type can vary in length up to the largest value of type `Natural' (usually that's over 2 billion characters).
+
+Ada 95 includes some types that represent strings from other languages, namely C, COBOL, and Fortran.
 
 
+Once you have a string, you can use predefined Ada operations on arrays (since a string is simply an array of characters).
 
+	- Any attempt to read or write a nonexistent index position will cause the exception Constraint_Error to be raised.
+	- You can read or overwrite a slice (i.e., a substring). the source and destinations must have the same length.
+	- You can assign a whole string from one String to another the same way as any other variable, as long as their lengths are equal
+	- You can concatenate (combine) strings together using the "&" operator.
 
+	
 
