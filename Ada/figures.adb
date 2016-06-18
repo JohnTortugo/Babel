@@ -1,39 +1,61 @@
-package Figures is
+with Ada.Text_IO; use Ada.Text_IO;
+
+package body Figures is
 	-- Package to demonstrate Object Orientation
 
-	type Point is
-		record
-			X, Y : Float;
-		end record;
+	function Area(F : Figure) return Float is
+	begin
+		return 1.0;
+	end Area;
 
-	type Figure is tagged
-		record
-			Start : Point;
-		end record;
+	function Perimeter(F : Figure) return Float is
+	begin
+		return 1.0;
+	end Perimeter;
 
-	function Area(F : Figure) return Float;
-	function Perimeter(F : Figure) return Float;
-	procedure Draw(F : Figure);
+	procedure Draw(F : Figure) is
+	begin
+		Put("Draw");
+	end Draw;
 
-	type Circle is new Figure with
-		record
-			Radius : Float;
-		end record;
 
-	function Area(C : Circle) return Float;
-	function Perimeter(C : Circle) return Float;
-	procedure Draw(C : Circle);
 
-	type Rectangle is new Figure with
-		record
-			Width : Float;
-			Height : Float;
-		end record;
 
-	function Area(R : Rectangle) return Float;
-	function Perimeter(R : Rectangle) return Float;
-	procedure Draw(R : Rectangle);
+	function Area(C : Circle) return Float is
+	begin
+		return 1.0;
+	end Area;
 
-	type Square is new Rectangle with null record;
+	function Perimeter(C : Circle) return Float is
+	begin
+		return 1.0;
+	end Perimeter;
+
+	procedure Draw(C : Circle) is
+	begin
+		Put("Draw");
+	end Draw;
+
+
+
+	function Area(R : Rectangle) return Float is
+	begin
+		return 1.0;
+	end Area;
+
+	function Perimeter(R : Rectangle) return Float is
+	begin
+		return 1.0;
+	end Perimeter;
+
+	procedure Draw(R : Rectangle) is
+	begin
+		Put("Draw");
+	end Draw;
+
+begin
+	Put_Line("This is the constructor of this **package**");
+
+	
 
 end Figures;
