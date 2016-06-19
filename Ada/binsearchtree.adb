@@ -4,6 +4,8 @@ use Ada.Text_IO, Ada.Integer_Text_IO;
 package body BinSearchTree is
 	function SearchRightmost(root : in TreeNode_ptr) return Integer is
 	begin
+		-- The way we access the fields of the struct is the same as in 
+		-- C/C++.
 		if (root.Right = null) then
 			return root.Value;
 		else 
@@ -14,6 +16,11 @@ package body BinSearchTree is
 	procedure Insert(root : in out TreeNode_ptr; key : in Integer) is
 	begin
 		if root = null then
+			-- You use the keyword "New" to allocate memory in the heap.
+			-- For some reason you need to include an apostrophe after
+			-- the type name. A nice thing is that you can initialize the
+			-- record parameters by their name. The syntax for assignment
+			-- here is a little different from the ones in other places.
 			root := new TreeNode'(Value => key, Left => null, Right => null);
 		else
 			if key < root.Value then
@@ -25,12 +32,16 @@ package body BinSearchTree is
 	end Insert;
 
 	procedure Remove(root : in out TreeNode_ptr; key : in Integer) is
+		-- Local variables are declared in this region.
 		rightmostValue : Integer := 0;
 	begin
+		-- The inequality operator (/=) is a little different of the commonly
+		-- used nowadays (!=). But it is more similar to the mathematical symbol.
 		if (root /= null) then
 			if (root.Value = key) then
 				if (root.Left = null and root.Right = null) then
 					root := null;
+				-- note that the word is "elsif" (like Bash) not "elseif"
 				elsif (root.Left /= null) then
 					root := root.Left;
 				elsif (root.Right /= null) then
@@ -103,8 +114,6 @@ package body BinSearchTree is
 			Put(")");
 		end if;
 	end PrintPosOrder;
-
-
 
 end BinSearchTree;
 
